@@ -224,25 +224,27 @@ ul {
 }
 
 .nav-logo-img {
-    height: 46px;
+    height: 48px;
     width: auto;
     object-fit: contain;
     mix-blend-mode: screen;
-    filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.4));
+    filter: contrast(135%) brightness(92%) drop-shadow(0 0 8px rgba(212, 175, 55, 0.45));
     transition: var(--transition);
 }
 
 .footer-logo-img {
-    height: 38px;
+    height: 40px;
     width: auto;
     object-fit: contain;
     mix-blend-mode: screen;
-    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+    filter: contrast(135%) brightness(92%) drop-shadow(0 0 6px rgba(212, 175, 55, 0.35));
+    transition: var(--transition);
 }
 
-.brand-logo:hover .nav-logo-img {
+.brand-logo:hover .nav-logo-img,
+.brand-logo:hover .footer-logo-img {
     transform: scale(1.05);
-    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.7));
+    filter: contrast(140%) brightness(100%) drop-shadow(0 0 14px rgba(212, 175, 55, 0.8));
 }
 
 .logo-emblem {
@@ -508,29 +510,29 @@ ul {
 .lawyer-visual {
     position: relative;
     background: 
-        radial-gradient(circle at center, rgba(212,175,55,0.09) 0%, rgba(13,15,18,0.96) 80%);
+        radial-gradient(circle at center, rgba(212, 175, 55, 0.12) 0%, rgba(15, 17, 22, 0.98) 75%);
     border: 1px solid var(--border-highlight);
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 3rem 2rem;
     text-align: center;
-    box-shadow: var(--shadow-card);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 175, 55, 0.12);
     overflow: hidden;
 }
 
 .lawyer-card-logo {
-    width: 220px;
+    width: 230px;
     max-width: 100%;
     height: auto;
     object-fit: contain;
     mix-blend-mode: screen;
-    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+    filter: contrast(135%) brightness(92%) drop-shadow(0 0 18px rgba(212, 175, 55, 0.5));
     margin-bottom: 1rem;
     transition: var(--transition);
 }
 
 .lawyer-card-logo:hover {
-    transform: scale(1.03);
-    filter: drop-shadow(0 0 22px rgba(212, 175, 55, 0.7));
+    transform: scale(1.04);
+    filter: contrast(140%) brightness(98%) drop-shadow(0 0 25px rgba(212, 175, 55, 0.8));
 }
 
 .owl-svg {
