@@ -1,0 +1,327 @@
+/* ==========================================================================
+   FB ABOGADOS - SISTEMA AVANZADO DE SEGURIDAD Y VALIDACIÓN ANTI-SPAM
+   Firma Legal: Lic. Edith Bernal Martínez (Céd. Prof. 14200776)
+   ========================================================================== */
+
+/* ==========================================================================
+   MÓDULO DE SEGURIDAD MILITAR (ANTI-SPAM, ANTI-ASESORÍAS FALSAS, ANTI-BOTS)
+   ========================================================================== */
+const UltraSecurityEngine = (() => {
+    // Marca de tiempo del momento exacto en que el usuario cargó la página
+    const pageLoadTime = Date.now();
+
+    /**
+     * 1. SANITIZACIÓN Y DESINFECCIÓN DE TEXTO (ANTI-SQLi Y ANTI-XSS)
+     */
+    const sanitizeText = (input) => {
+        if (typeof input !== 'string') return '';
+        
+        let cleaned = input
+            // Remueve caracteres de control invisibles y nulos
+            .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '')
+            // Neutraliza intentos de inyección de comandos o SQL
+            .replace(/(\b(SELECT|INSERT|UPDATE|DELETE|DROP|ALTER|CREATE|EXEC|UNION|TRUNCATE)\b)/gi, '')
+            .replace(/(--|\/\*|\*\/|;|--\s*)/g, '');
+
+        // Mapa de reemplazo seguro para evitar Cross-Site Scripting (XSS)
+        const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#x27;',
+            "/": '&#x2F;'
+        };
+        return cleaned.replace(/[&<>"'/]/g, (m) => map[m]);
+    };
+
+    /**
+     * 2. DETECTOR DE NOMBRES FALSOS Y TECLAZOS ALEATORIOS (GIBBERISH FILTER)
+     */
+    const isFakeName = (name) => {
+        if (!name || name.trim().length < 3) return true;
+        const cleanName = name.trim().toLowerCase();
+
+        // Lista de nombres genéricos o falsos comunes
+        const fakeKeywords = ['test', 'prueba', 'admin', 'fake', 'nombre', 'asdf', 'qwerty', 'aaaa', 'zzzz', '1234'];
+        if (fakeKeywords.some(keyword => cleanName.includes(keyword))) return true;
+
+        // Detecta más de 3 caracteres idénticos consecutivos (ej. "Juuuuuan", "aaaaa")
+        if (/(.)\1{3,}/i.test(cleanName)) return true;
+
+        // Detecta teclazos de consonantes sin vocales (ej. "sdfghjkl")
+        const hasVowels = /[aeiouáéíóú]/i.test(cleanName);
+        if (!hasVowels && cleanName.length > 4) return true;
+
+        return false;
+    };
+
+    /**
+     * 3. DETECTOR DE TELÉFONOS FALSOS O SECUENCIAS INVÁLIDAS
+     */
+    const isFakePhone = (phone) => {
+        if (!phone) return true;
+        const cleanDigits = phone.replace(/[^\d]/g, '');
+
+        // Valida longitud (debe tener entre 10 y 15 dígitos)
+        if (cleanDigits.length < 10 || cleanDigits.length > 15) return true;
+
+        // Bloquea secuencias repetidas como 0000000000, 1111111111, 9999999999
+        if (/^(\d)\1{9,}$/.test(cleanDigits)) return true;
+
+        // Bloquea secuencias progresivas falsas comunes
+        const fakeSequences = ['1234567890', '0987654321', '1231231231', '0123456789', '9876543210'];
+        if (fakeSequences.some(seq => cleanDigits.includes(seq))) return true;
+
+        return false;
+    };
+
+    /**
+     * 4. FILTRO ANTI-PUBLICIDAD Y ENLACES MALICIOSOS (SPAM DETECTOR)
+     */
+    const isSpamContent = (text) => {
+        if (!text) return false;
+        const cleanText = text.toLowerCase();
+
+        // Detecta si intentan enviar enlaces o URLs externas en la consulta legal
+        const urlPattern = /(https?:\/\/|www\.|ftp:\/\/|[a-z0-9-]+\.(com|net|org|ru|cn|xyz|top|site|online|tk|info))/i;
+        if (urlPattern.test(cleanText)) return true;
+
+        // Palabras clave de spam comercial/casino/cripto
+        const spamKeywords = [
+            'casino', 'bitcoin', 'crypto', 'viagra', 'seo', 'backlinks', 
+            'prestamo inmediato', 'ganar dinero', 'investment', 'telegram', 
+            'whatsapp bot', 'subscriptores', 'seguidores'
+        ];
+        if (spamKeywords.some(word => cleanText.includes(word))) return true;
+
+        return false;
+    };
+
+    /**
+     * 5. VALIDACIÓN DE EMAIL RIGUROSA
+     */
+    const isValidEmail = (email) => {
+        if (!email) return false;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailRegex.test(email.trim());
+    };
+
+    /**
+     * 6. DETECTOR DE TIEMPO HUMANO (ANTI-BOT TIEMPO MÍNIMO)
+     */
+    const isSubmittedTooFast = (minSeconds = 3.5) => {
+        const elapsed = (Date.now() - pageLoadTime) / 1000;
+        return elapsed < minSeconds; // Si se envía en menos de 3.5 segundos es un bot
+    };
+
+    /**
+     * 7. CONTROL DE ENVIOS CONTINUOS (THROTTLE ENFRIAMIENTO DE 5 SEGUNDOS)
+     */
+    const submissionCooldowns = new Map();
+    const isThrottled = (formId, cooldownMs = 5000) => {
+        const now = Date.now();
+        const lastSubmit = submissionCooldowns.get(formId) || 0;
+        if (now - lastSubmit < cooldownMs) {
+            return true;
+        }
+        submissionCooldowns.set(formId, now);
+        return false;
+    };
+
+    return {
+        sanitizeText,
+        isFakeName,
+        isFakePhone,
+        isSpamContent,
+        isValidEmail,
+        isSubmittedTooFast,
+        isThrottled
+    };
+})();
+
+// Inicialización de lógica interactiva
+document.addEventListener('DOMContentLoaded', () => {
+
+    /* ----------------------------------------------------------------------
+       1. AÑO DINÁMICO EN FOOTER
+       ---------------------------------------------------------------------- */
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear().toString();
+    }
+
+    /* ----------------------------------------------------------------------
+       2. NAVEGACIÓN MÓVIL
+       ---------------------------------------------------------------------- */
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (navMenu.classList.contains('active') && !navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    }
+
+    /* ----------------------------------------------------------------------
+       3. DIAGNÓSTICO CON VALIDACIÓN ANTI-BOTS Y ANTI-SPAM
+       ---------------------------------------------------------------------- */
+    const diagnosticForm = document.getElementById('diagnosticForm');
+    if (diagnosticForm) {
+        diagnosticForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Trampa Honeypot: Si el campo invisible fue llenado, se bloquea silenciosamente (es un bot)
+            const honeypotVal = document.getElementById('diagnostic_hp_check')?.value;
+            if (honeypotVal && honeypotVal.trim() !== '') {
+                console.warn('Bot detectado vía Honeypot.');
+                return;
+            }
+
+            // Verificación de tiempo de interacción humano
+            if (UltraSecurityEngine.isSubmittedTooFast()) {
+                alert('Por favor tómate un momento para revisar las opciones antes de enviar.');
+                return;
+            }
+
+            // Control de envíos repetidos
+            if (UltraSecurityEngine.isThrottled('diagnosticForm')) {
+                alert('Por favor espera 5 segundos antes de realizar otra evaluación.');
+                return;
+            }
+
+            // Extracción y sanitización
+            const rawMateria = document.querySelector('input[name="materia"]:checked')?.value || 'No especificada';
+            const rawEstado = document.querySelector('input[name="estado"]:checked')?.value || 'No especificado';
+            const rawDesc = document.getElementById('caseDescription')?.value || 'Sin detalles adicionales';
+
+            const cleanMateria = UltraSecurityEngine.sanitizeText(rawMateria);
+            const cleanEstado = UltraSecurityEngine.sanitizeText(rawEstado);
+            const cleanDesc = UltraSecurityEngine.sanitizeText(rawDesc);
+
+            // Filtro anti-spam en descripción
+            if (UltraSecurityEngine.isSpamContent(cleanDesc)) {
+                alert('Tu mensaje contiene enlaces o palabras no permitidas. Por favor ingresa únicamente los detalles de tu consulta legal.');
+                return;
+            }
+
+            const phone = "527291404674"; // Lic. Edith Bernal
+            const message = `*NUEVA CONSULTA DESDE SITIO WEB (FB ABOGADOS)*%0A%0A` +
+                            `📌 *Materia:* ${encodeURIComponent(cleanMateria)}%0A` +
+                            `⚖️ *Estado del Caso:* ${encodeURIComponent(cleanEstado)}%0A` +
+                            `📝 *Detalles:* ${encodeURIComponent(cleanDesc)}%0A%0A` +
+                            `Solicito una evaluación y propuesta de representación por la Lic. Edith Bernal.`;
+
+            const waUrl = `https://wa.me/${phone}?text=${message}`;
+            window.open(waUrl, '_blank', 'noopener,noreferrer');
+        });
+    }
+
+    /* ----------------------------------------------------------------------
+       4. FORMULARIO DE CONTACTO CON VALIDACIONES MILITARES DE IDENTIDAD
+       ---------------------------------------------------------------------- */
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // 1. Trampa Honeypot para Bots
+            const hpValue = document.getElementById('contact_hp_check')?.value;
+            if (hpValue && hpValue.trim() !== '') {
+                console.warn('Bot de spam interceptado.');
+                return;
+            }
+
+            // 2. Verificación de velocidad de envío humano (Anti-Bot)
+            if (UltraSecurityEngine.isSubmittedTooFast()) {
+                alert('Por favor tómate un momento para revisar tus datos antes de enviar.');
+                return;
+            }
+
+            // 3. Control de enfriamiento (Anti-Flood)
+            if (UltraSecurityEngine.isThrottled('contactForm')) {
+                alert('Por favor espera 5 segundos antes de realizar otro envío.');
+                return;
+            }
+
+            // 4. Captura de datos
+            const rawName = document.getElementById('clientName')?.value || '';
+            const rawPhone = document.getElementById('clientPhone')?.value || '';
+            const rawEmail = document.getElementById('clientEmail')?.value || '';
+            const rawMessage = document.getElementById('clientMessage')?.value || '';
+
+            // 5. Sanitización inicial
+            const cleanName = UltraSecurityEngine.sanitizeText(rawName);
+            const cleanPhone = rawPhone.replace(/[^\d]/g, '');
+            const cleanEmail = rawEmail.trim() ? UltraSecurityEngine.sanitizeText(rawEmail) : 'No proporcionado';
+            const cleanMsg = UltraSecurityEngine.sanitizeText(rawMessage);
+
+            // 6. VALIDACIÓN RIGUROSA DE NOMBRE REAL
+            if (UltraSecurityEngine.isFakeName(cleanName)) {
+                alert('Por favor ingresa tu nombre y apellido reales (sin caracteres repetidos o teclazos de prueba).');
+                document.getElementById('clientName')?.focus();
+                return;
+            }
+
+            // 7. VALIDACIÓN RIGUROSA DE TELÉFONO REAL
+            if (UltraSecurityEngine.isFakePhone(rawPhone)) {
+                alert('Por favor ingresa un número de teléfono o WhatsApp válido de 10 dígitos (ej. 7221234567).');
+                document.getElementById('clientPhone')?.focus();
+                return;
+            }
+
+            // 8. VALIDACIÓN DE EMAIL (SI SE PROPORCIONÓ)
+            if (rawEmail.trim() && !UltraSecurityEngine.isValidEmail(rawEmail)) {
+                alert('El correo electrónico ingresado no tiene un formato válido (ejemplo: cliente@correo.com).');
+                document.getElementById('clientEmail')?.focus();
+                return;
+            }
+
+            // 9. VALIDACIÓN ANTI-SPAM / ENLACES PUBLICITARIOS EN MENSAJE
+            if (UltraSecurityEngine.isSpamContent(cleanMsg)) {
+                alert('El mensaje no puede contener enlaces de internet o publicidad. Por favor redacta tu duda legal.');
+                document.getElementById('clientMessage')?.focus();
+                return;
+            }
+
+            // 10. MENSAJE FINAL COMPROBADO Y AUTÉNTICO
+            const targetPhone = "527291404674";
+            const message = `*SOLICITUD DE ASESORÍA AUTÉNTICA - FB ABOGADOS*%0A%0A` +
+                            `👤 *Cliente:* ${encodeURIComponent(cleanName)}%0A` +
+                            `📞 *Teléfono:* ${encodeURIComponent(cleanPhone)}%0A` +
+                            `✉️ *Correo:* ${encodeURIComponent(cleanEmail)}%0A` +
+                            `💬 *Detalles del Caso:* ${encodeURIComponent(cleanMsg)}%0A%0A` +
+                            `Lic. Edith Bernal, solicito orientación legal directa.`;
+
+            const waUrl = `https://wa.me/${targetPhone}?text=${message}`;
+            window.open(waUrl, '_blank', 'noopener,noreferrer');
+        });
+    }
+
+    /* ----------------------------------------------------------------------
+       5. EFECTO DE SOMBRA EN LA BARRA DE NAVEGACIÓN
+       ---------------------------------------------------------------------- */
+    window.addEventListener('scroll', () => {
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 5px 20px rgba(0,0,0,0.8)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        }
+    });
+});
