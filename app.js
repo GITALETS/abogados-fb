@@ -43,9 +43,9 @@ const UltraSecurityEngine = (() => {
         if (!name || name.trim().length < 3) return true;
         const cleanName = name.trim().toLowerCase();
 
-        // Lista de nombres genéricos o falsos comunes
-        const fakeKeywords = ['test', 'prueba', 'admin', 'fake', 'nombre', 'asdf', 'qwerty', 'aaaa', 'zzzz', '1234'];
-        if (fakeKeywords.some(keyword => cleanName.includes(keyword))) return true;
+        // Lista de palabras clave que identifican envíos ficticios (usando límites de palabra para evitar falsos positivos)
+        const fakePattern = /\b(test|prueba|admin|fake|asdf|qwerty|aaaa|zzzz|1234)\b/i;
+        if (fakePattern.test(cleanName)) return true;
 
         // Detecta más de 3 caracteres idénticos consecutivos (ej. "Juuuuuan", "aaaaa")
         if (/(.)\1{3,}/i.test(cleanName)) return true;
@@ -84,8 +84,8 @@ const UltraSecurityEngine = (() => {
         if (!text) return false;
         const cleanText = text.toLowerCase();
 
-        // Detecta si intentan enviar enlaces o URLs externas en la consulta legal
-        const urlPattern = /(https?:\/\/|www\.|ftp:\/\/|[a-z0-9-]+\.(com|net|org|ru|cn|xyz|top|site|online|tk|info))/i;
+        // Detecta si intentan enviar enlaces o URLs externas en la consulta legal (con límite de palabra para evitar falsos positivos)
+        const urlPattern = /(https?:\/\/|www\.|ftp:\/\/|[a-z0-9-]+\.(com|net|org|ru|cn|xyz|top|site|online|tk|info)\b)/i;
         if (urlPattern.test(cleanText)) return true;
 
         // Palabras clave de spam comercial/casino/cripto
@@ -202,12 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Control de envíos repetidos
-            if (UltraSecurityEngine.isThrottled('diagnosticForm')) {
-                alert('Por favor espera 5 segundos antes de realizar otra evaluación.');
-                return;
-            }
-
             // Verificación de consentimiento de privacidad y deslinde legal
             const diagnosticTermsCheck = document.getElementById('acceptDiagnosticTerms');
             if (diagnosticTermsCheck && !diagnosticTermsCheck.checked) {
@@ -250,6 +244,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             `📝 *Detalles:* ${encodeURIComponent(cleanDesc)}%0A%0A` +
                             `Solicito una evaluación y propuesta de representación dirigida a ${encodeURIComponent(targetLawyerName)}.`;
 
+            // Control de envíos repetidos (se evalúa tras superar las validaciones)
+            if (UltraSecurityEngine.isThrottled('diagnosticForm')) {
+                alert('Por favor espera 5 segundos antes de realizar otra evaluación.');
+                return;
+            }
+
             const waUrl = `https://wa.me/${targetPhone}?text=${message}`;
             window.open(waUrl, '_blank', 'noopener,noreferrer');
         });
@@ -281,12 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (legalTermsCheck && !legalTermsCheck.checked) {
                 alert('Debes confirmar que has leído y aceptas el Aviso de Privacidad y Términos Legales antes de enviar tu consulta.');
                 legalTermsCheck.focus();
-                return;
-            }
-
-            // 3. Control de enfriamiento (Anti-Flood)
-            if (UltraSecurityEngine.isThrottled('contactForm')) {
-                alert('Por favor espera 5 segundos antes de realizar otro envío.');
                 return;
             }
 
@@ -350,6 +344,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             `✉️ *Correo:* ${encodeURIComponent(cleanEmail)}%0A` +
                             `💬 *Detalles del Caso:* ${encodeURIComponent(cleanMsg)}%0A%0A` +
                             `Solicito orientación legal directa dirigida a: ${encodeURIComponent(targetLawyerName)}.`;
+
+            // 11. Control de enfriamiento (se valida una vez que todos los campos son correctos)
+            if (UltraSecurityEngine.isThrottled('contactForm')) {
+                alert('Por favor espera 5 segundos antes de realizar otro envío.');
+                return;
+            }
 
             const waUrl = `https://wa.me/${targetPhone}?text=${message}`;
             window.open(waUrl, '_blank', 'noopener,noreferrer');
