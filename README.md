@@ -24,7 +24,7 @@ El sitio incluye un evaluador interactivo y un formulario de contacto directo di
 
 - **Módulo de Validación Técnica y Filtro Anti-Spam (JavaScript)**:
   - **Filtro Anti-Bots & Honeypot**: Campos trampa invisibles para neutralizar envíos automatizados no deseados.
-  - **Validación de Identidad**: Detección de caracteres aleatorios (*gibberish*), patrones repetidos y nombres ficticios.
+  - **Validación de Identidad**: Exigencia de nombre y apellido completos, detección de caracteres aleatorios (*gibberish*), patrones repetidos, modismos, apodos de burla y albures mexicanos comunes.
   - **Validador de Teléfono**: Verificación de longitud mínima (10 dígitos) y descarte de secuencias genéricas artificiales.
   - **Sanitización de Entradas**: Filtrado de caracteres especiales y prevención de inyecciones de código (XSS).
   - **Filtro de Contenido no Deseado**: Restricción de hipervínculos externos y contenido publicitario ajeno a la consulta legal.

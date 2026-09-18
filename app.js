@@ -37,22 +37,35 @@ const UltraSecurityEngine = (() => {
     };
 
     /**
-     * 2. DETECTOR DE NOMBRES FALSOS Y TECLAZOS ALEATORIOS (GIBBERISH FILTER)
+     * 2. DETECTOR ESTRICTO DE NOMBRES REALES (FILTRO ANTI-BOTS, MODISMOS, BURLAS Y ALBURES MEXICANOS)
      */
     const isFakeName = (name) => {
-        if (!name || name.trim().length < 3) return true;
+        if (!name || name.trim().length < 4) return true;
         const cleanName = name.trim().toLowerCase();
 
-        // Lista de palabras clave que identifican envíos ficticios (usando límites de palabra para evitar falsos positivos)
-        const fakePattern = /\b(test|prueba|admin|fake|asdf|qwerty|aaaa|zzzz|1234)\b/i;
-        if (fakePattern.test(cleanName)) return true;
+        // 1. Requiere al menos dos palabras válidas (Nombre y Apellido)
+        const parts = cleanName.split(/\s+/).filter(p => p.length >= 2);
+        if (parts.length < 2) return true;
 
-        // Detecta más de 3 caracteres idénticos consecutivos (ej. "Juuuuuan", "aaaaa")
+        // 2. Bloquea palabras idénticas consecutivas (ej. "Juan Juan", "Pedro Pedro")
+        if (parts[0] === parts[1]) return true;
+
+        // 3. Detecta teclazos de consonantes sin vocales o repetición anormal
         if (/(.)\1{3,}/i.test(cleanName)) return true;
-
-        // Detecta teclazos de consonantes sin vocales (ej. "sdfghjkl")
         const hasVowels = /[aeiouáéíóú]/i.test(cleanName);
-        if (!hasVowels && cleanName.length > 4) return true;
+        if (!hasVowels) return true;
+
+        // 4. Filtro de palabras clave de prueba, bots y nombres ficticios genéricos
+        const botPattern = /\b(test|prueba|pruebas|admin|fake|asdf|qwerty|aaaa|zzzz|1234|bot|anonimo|desconocido|nadie|alguien|persona|usuario|fulano|fulanito|mengano|menganito|perengano|perenganito|sutano|sutanito)\b/i;
+        if (botPattern.test(cleanName)) return true;
+
+        // 5. Filtro estricto de modismos, apodos de burla, vulgaridades y groserías mexicanas comunes
+        const trollPattern = /\b(calva|pelon|pelona|pelochas|chavo|morro|morra|wey|guey|vato|chistoso|bromita|broma|payaso|payasa|mamon|mamona|pendejo|pendeja|puto|puta|culero|culera|cabron|cabrona|chinga|chingon|chingona|chingada|verga|vergas|pinche|zorra|perra|pito|culo|mierda|maricon|tarado|tarada|idiota|estupido|estupida|naco|naca)\b/i;
+        if (trollPattern.test(cleanName)) return true;
+
+        // 6. Detección de albures y juegos de doble sentido mexicanos clásicos en nombres
+        const alburPattern = /(aquiles\s+ba|benito\s+came|rosa\s+mel|alma\s+marce|elba\s+zu|elba\s+sur|elba\s+jin|elba\s+gin|elba\s+gon|elber\s+ga|elver\s+ga|deba\s+jota|deva\s+jota|sevelinda\s+pa|lola\s+mento|soila\s+cer|agapito\s+mel|micho\s+cho|tito\s+var|chupame|telometo)/i;
+        if (alburPattern.test(cleanName)) return true;
 
         return false;
     };
@@ -299,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 6. VALIDACIÓN RIGUROSA DE NOMBRE REAL
             if (UltraSecurityEngine.isFakeName(cleanName)) {
-                alert('Por favor ingresa tu nombre y apellido reales (sin caracteres repetidos o teclazos de prueba).');
+                alert('Por favor ingresa tu nombre y apellido reales y completos (ej. Juan Pérez) sin apodos, bromas o modismos.');
                 document.getElementById('clientName')?.focus();
                 return;
             }
