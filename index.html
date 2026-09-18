@@ -11,6 +11,7 @@
     <meta property="og:title" content="FB Abogados | Lic. Edith Bernal & Lic. Miguel Fabián - Firma Legal">
     <meta property="og:description" content="Despacho Jurídico Especializado. Lic. Edith Bernal Martínez (Céd. 14200776) y Lic. Miguel Fabián Sánchez (Céd. 14066883). Asesoría remota o presencial en materia Penal, Familiar, Civil, Agraria y Mercantil.">
     <meta property="og:image" content="logo.jpeg">
+    <meta property="og:url" content="https://gitalets.github.io/abogados-fb/">
     <meta property="og:type" content="website">
 
     <!-- Google Fonts -->
@@ -79,7 +80,7 @@
             <div class="hero-badge">
                 <i class="fa-solid fa-scale-balanced"></i> Contamos con Experiencia en Materia Penal, Familiar, Civil, Agraria y Mercantil
             </div>
-            <h1 class="hero-title">Soluciones Legales Estratégicas y Resultados Garantizados</h1>
+            <h1 class="hero-title">Soluciones Legales Estratégicas y Asesoría Jurídica Especializada</h1>
             <p class="hero-subtitle">
                 Atención jurídica personalizada por la <strong>Lic. Edith Bernal Martínez</strong> y el <strong>Lic. Miguel Fabián Sánchez</strong>. Protegemos tu patrimonio, familia y tranquilidad con absoluta discreción, ética y solidez técnica.
             </p>
@@ -399,13 +400,20 @@
                         <textarea class="form-textarea" id="caseDescription" maxlength="1000" inputmode="text" autocorrect="on" placeholder="Ej. Necesito arreglar una pensión alimenticia, o tuve un accidente de tránsito y requiero asesoría..."></textarea>
                     </div>
 
-                    <div class="diagnostic-action mt-4 text-center">
+                    <div class="legal-checkbox-group mt-3 text-left">
+                        <label class="legal-checkbox-label">
+                            <input type="checkbox" id="acceptDiagnosticTerms" required>
+                            <span>He leído y acepto el <a href="javascript:void(0)" class="legal-link trigger-legal-modal" data-tab="privacidad">Aviso de Privacidad</a> y el <a href="javascript:void(0)" class="legal-link trigger-legal-modal" data-tab="deslinde">Deslinde de Responsabilidad Legal</a>.</span>
+                        </label>
+                    </div>
+
+                    <div class="diagnostic-action mt-3 text-center">
                         <button type="submit" class="btn btn-gold btn-large btn-glow">
                             <i class="fa-brands fa-whatsapp"></i> Enviar Diagnóstico a WhatsApp
                         </button>
                         <div class="form-legal-note">
                             <p>
-                                <i class="fa-solid fa-shield-halved text-gold"></i> Información protegida bajo secreto profesional. Consulta nuestro 
+                                <i class="fa-solid fa-shield-halved text-gold"></i> Canalización protegida bajo compromiso de confidencialidad profesional. Consulta nuestro 
                                 <a href="javascript:void(0)" class="legal-link trigger-legal-modal" data-tab="privacidad">Aviso de Privacidad</a> y 
                                 <a href="javascript:void(0)" class="legal-link trigger-legal-modal" data-tab="deslinde">Deslinde de Responsabilidad Legal</a>.
                             </p>
@@ -493,6 +501,14 @@
                                 <span>Remota o Presencial (Horarios Flexibles)</span>
                             </div>
                         </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fa-solid fa-location-dot text-gold"></i></div>
+                            <div>
+                                <h5>Cobertura Geográfica</h5>
+                                <span>Valle de Toluca y Estado de México (Asesorías Presenciales previa cita) | Atención Remota a Nivel Nacional</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -538,7 +554,7 @@
 
                             <div class="legal-checkbox-group">
                                 <label class="legal-checkbox-label">
-                                    <input type="checkbox" id="acceptLegalTerms" required checked>
+                                    <input type="checkbox" id="acceptLegalTerms" required>
                                     <span>He leído y acepto el <a href="javascript:void(0)" class="legal-link trigger-legal-modal" data-tab="privacidad">Aviso de Privacidad</a>, los <a href="javascript:void(0)" class="legal-link trigger-legal-modal" data-tab="terminos">Términos y Condiciones</a> y el <a href="javascript:void(0)" class="legal-link trigger-legal-modal" data-tab="deslinde">Deslinde de Responsabilidad</a>.</span>
                                 </label>
                             </div>
@@ -591,11 +607,11 @@
 
             <div class="footer-legal">
                 <h4>Marco Legal & Privacidad</h4>
-                <p>Ejercicio profesional sujeto a Cédulas Profesionales SEP (14200776 y 14066883) y estricto secreto profesional.</p>
+                <p>Ejercicio profesional respaldado por Cédulas Profesionales SEP y compromiso con la confidencialidad de la información proporcionada por nuestros clientes.</p>
                 <ul class="footer-legal-links">
                     <li><a href="javascript:void(0)" class="trigger-legal-modal" data-tab="privacidad"><i class="fa-solid fa-shield-halved text-gold"></i> Aviso de Privacidad Integral (LFPDPPP)</a></li>
                     <li><a href="javascript:void(0)" class="trigger-legal-modal" data-tab="terminos"><i class="fa-solid fa-file-contract text-gold"></i> Términos y Condiciones de Uso</a></li>
-                    <li><a href="javascript:void(0)" class="trigger-legal-modal" data-tab="deslinde"><i class="fa-solid fa-scale-balanced text-gold"></i> Deslinde Legal y Secreto Profesional</a></li>
+                    <li><a href="javascript:void(0)" class="trigger-legal-modal" data-tab="deslinde"><i class="fa-solid fa-scale-balanced text-gold"></i> Deslinde Legal y Confidencialidad</a></li>
                 </ul>
                 <p class="copyright">&copy; <span id="year"></span> FB Abogados. Todos los derechos reservados.</p>
             </div>
@@ -606,7 +622,7 @@
     <div class="legal-modal" id="legalModal" aria-hidden="true" role="dialog" aria-labelledby="legalModalTitle">
         <div class="legal-modal-container">
             <div class="legal-modal-header">
-                <h3 id="legalModalTitle"><i class="fa-solid fa-scale-balanced text-gold"></i> Marco Legal y Normativo</h3>
+                <h3 id="legalModalTitle"><i class="fa-solid fa-scale-balanced text-gold"></i> Documentación Legal y Privacidad</h3>
                 <button type="button" class="legal-modal-close" id="closeLegalModal" aria-label="Cerrar modal">&times;</button>
             </div>
 
@@ -631,52 +647,72 @@
                     <div class="legal-section-block">
                         <h5><i class="fa-solid fa-user-shield"></i> 1. Identidad y Domicilio de los Responsables</h5>
                         <p>
-                            El despacho jurídico <strong>FB Abogados</strong>, integrado por los profesionistas titulados <strong>Lic. Edith Bernal Martínez</strong> (Cédula Profesional SEP 14200776) y <strong>Lic. Miguel Fabián Sánchez</strong> (Cédula Profesional SEP 14066883), es el responsable directo del tratamiento, uso y salvaguarda de sus datos personales.
+                            El despacho jurídico <strong>FB Abogados</strong>, integrado por los profesionistas titulados <strong>Lic. Edith Bernal Martínez</strong> (Cédula Profesional SEP 14200776) y <strong>Lic. Miguel Fabián Sánchez</strong> (Cédula Profesional SEP 14066883), con domicilio convencional de atención profesional en el Estado de México (Valle de Toluca) para oír y recibir notificaciones relativas a la privacidad de datos, es el responsable del tratamiento, uso y salvaguarda de sus datos personales.
                         </p>
                         <p>
-                            Para cualquier aspecto relativo al tratamiento de sus datos o ejercicio de derechos ARCO, nuestro canal oficial de atención es el correo electrónico: <strong>EBM10012000@GMAIL.COM</strong> y los números de contacto profesional acreditados en este sitio.
+                            Para cualquier aspecto relativo al tratamiento de sus datos o el ejercicio de derechos ARCO, nuestro canal oficial de atención es el correo electrónico: <strong>EBM10012000@GMAIL.COM</strong> y los números de contacto profesional acreditados en este portal.
                         </p>
                     </div>
 
                     <div class="legal-section-block">
                         <h5><i class="fa-solid fa-database"></i> 2. Datos Personales que se Recaban</h5>
-                        <p>Para la atención y evaluación de su solicitud jurídica, podemos recabar las siguientes categorías de datos personales mediante nuestros formularios o mensajería de WhatsApp:</p>
+                        <p>Para la atención, evaluación preliminar y canalización de su solicitud jurídica, podemos recabar exclusivamente a través de nuestros formularios en línea o interacción voluntaria de WhatsApp las siguientes categorías de datos personales:</p>
                         <ul>
-                            <li><i class="fa-solid fa-check"></i> <strong>Datos de Identificación:</strong> Nombre completo del interesado o de su representante.</li>
-                            <li><i class="fa-solid fa-check"></i> <strong>Datos de Contacto:</strong> Número de teléfono fijo o móvil (WhatsApp) y correo electrónico.</li>
-                            <li><i class="fa-solid fa-check"></i> <strong>Información Jurídica Preliminar:</strong> Materia de la consulta (Penal, Familiar, Civil, Agraria o Mercantil), estado procesal (si existen notificaciones, citatorios o audiencias) y narrativa sucinta de los hechos que libre y voluntariamente proporcione el usuario.</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>Datos de Identificación:</strong> Nombre completo del solicitante o de su representante.</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>Datos de Contacto:</strong> Número de teléfono celular (WhatsApp) y cuenta de correo electrónico voluntaria.</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>Información Jurídica Preliminar:</strong> Materia de la consulta (Familiar, Civil, Penal, Agraria o Mercantil), estado procesal preliminar (si existen notificaciones, citatorios o audiencias) y descripción sucinta de los hechos que libre y voluntariamente proporcione el usuario.</li>
                         </ul>
                     </div>
 
                     <div class="legal-section-block">
-                        <h5><i class="fa-solid fa-bullseye"></i> 3. Finalidades del Tratamiento</h5>
-                        <p><strong>Finalidades Primarias (necesarias para el servicio solicitado):</strong></p>
-                        <ul>
-                            <li><i class="fa-solid fa-circle-dot"></i> Brindar orientación jurídica preliminar respecto a los hechos sometidos a consulta.</li>
-                            <li><i class="fa-solid fa-circle-dot"></i> Canalizar su asunto con el Abogado Titular especialista en la materia correspondiente.</li>
-                            <li><i class="fa-solid fa-circle-dot"></i> Establecer comunicación directa vía WhatsApp o llamada para agendar citas presenciales o remotas.</li>
-                            <li><i class="fa-solid fa-circle-dot"></i> En caso procedente, elaborar la propuesta formal de servicios profesionales y cotización de honorarios.</li>
-                        </ul>
-                        <p><strong>Finalidades Secundarias:</strong> Hacemos constar que <strong>NO</strong> utilizamos sus datos personales para fines mercadotécnicos, publicidad invasiva, boletines comerciales ni venta de bases de datos a terceros.</p>
-                    </div>
-
-                    <div class="legal-section-block">
-                        <h5><i class="fa-solid fa-share-nodes"></i> 4. Transferencia y No Divulgación de Datos</h5>
+                        <h5><i class="fa-solid fa-server"></i> 3. Tratamiento Técnico y Ausencia de Servidores de Almacenamiento Web</h5>
                         <p>
-                            Sus datos personales <strong>NO serán vendidos, cedidos, transferidos ni compartidos</strong> con terceras partes ajenas a la firma legal, salvo en los casos de excepción previstos expresamente por el Artículo 37 de la LFPDPPP o por requerimiento legítimo de autoridad ministerial o judicial competente con mandamiento debidamente fundado y motivado.
+                            <strong>Declaración de Transparencia Tecnológica:</strong> Hacemos constar de manera transparente que este sitio web opera exclusivamente como una interfaz de usuario del lado del cliente (Client-Side). <strong>El sitio no recopila, almacena ni procesa sus datos personales en servidores web propios, bases de datos remotas ni servicios externos de computación en la nube</strong>. Al enviar la consulta, el navegador formatea localmente la información y genera un enlace cifrado directo a la aplicación de mensajería WhatsApp (Meta Platforms, Inc.) para que el usuario transmita directamente la solicitud al teléfono del abogado titular seleccionado.
                         </p>
                     </div>
 
                     <div class="legal-section-block">
-                        <h5><i class="fa-solid fa-key"></i> 5. Ejercicio de Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición)</h5>
-                        <p>Usted tiene derecho en cualquier momento a conocer qué datos tenemos de usted, para qué los usamos y las condiciones del uso (Acceso); solicitar la corrección de su información en caso de que esté desactualizada, sea inexacta o incompleta (Rectificación); pedir que la eliminemos de nuestros registros o bases cuando considere que la misma no está siendo utilizada adecuadamente (Cancelación); así como oponerse al uso de sus datos para fines específicos (Oposición).</p>
+                        <h5><i class="fa-solid fa-bullseye"></i> 4. Finalidades del Tratamiento</h5>
+                        <p><strong>Finalidades Primarias (necesarias para el servicio preliminar solicitado):</strong></p>
+                        <ul>
+                            <li><i class="fa-solid fa-circle-dot"></i> Brindar orientación jurídica inicial respecto a los hechos sometidos a consulta.</li>
+                            <li><i class="fa-solid fa-circle-dot"></i> Canalizar su asunto con el Abogado Titular especialista en la materia correspondiente.</li>
+                            <li><i class="fa-solid fa-circle-dot"></i> Establecer comunicación directa vía WhatsApp o llamada para coordinar citas de asesoría presencial o remota.</li>
+                            <li><i class="fa-solid fa-circle-dot"></i> En caso procedente, formular la propuesta formal de servicios profesionales y cotización de honorarios.</li>
+                        </ul>
+                        <p><strong>Finalidades Secundarias:</strong> Hacemos constar expresamente que <strong>NO</strong> utilizamos sus datos personales para prospección comercial, publicidad masiva invasiva, listas de suscripción ni comercialización o transferencia de bases de datos a terceros.</p>
+                    </div>
+
+                    <div class="legal-section-block">
+                        <h5><i class="fa-solid fa-share-nodes"></i> 5. Transferencia y No Divulgación de Datos</h5>
                         <p>
-                            Para ejercer cualquiera de los Derechos ARCO, deberá enviar una solicitud por escrito al correo <strong>EBM10012000@GMAIL.COM</strong> señalando su nombre, medio de contacto, descripción clara de los datos a tratar y adjuntando copia simple de identificación oficial vigente.
+                            Sus datos personales <strong>NO serán comercializados, cedidos, transferidos ni compartidos</strong> con terceras partes ajenas a la firma legal, salvo en los supuestos de excepción previstos expresamente por el Artículo 37 de la LFPDPPP o por mandamiento escrito, legítimo, fundado y motivado de autoridad ministerial o judicial competente.
+                        </p>
+                    </div>
+
+                    <div class="legal-section-block">
+                        <h5><i class="fa-solid fa-key"></i> 6. Ejercicio de Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición)</h5>
+                        <p>Usted tiene derecho en cualquier momento a conocer qué datos tenemos de usted, para qué los usamos y las condiciones del uso (Acceso); solicitar la corrección de su información en caso de que esté desactualizada, sea inexacta o incompleta (Rectificación); pedir que la eliminemos de nuestros registros cuando considere que la misma no está siendo utilizada adecuadamente (Cancelación); así como oponerse al uso de sus datos para fines específicos (Oposición).</p>
+                        <p>
+                            Para ejercer cualquiera de los Derechos ARCO, deberá enviar una solicitud por escrito al correo electrónico <strong>EBM10012000@GMAIL.COM</strong> indicando:
+                        </p>
+                        <ul>
+                            <li><i class="fa-solid fa-angle-right"></i> Nombre del titular y medio de contacto para comunicarle la respuesta.</li>
+                            <li><i class="fa-solid fa-angle-right"></i> Copia simple de identificación oficial vigente del titular o de su representante legal.</li>
+                            <li><i class="fa-solid fa-angle-right"></i> Descripción clara y precisa de los datos personales respecto de los que se busca ejercer alguno de los derechos ARCO.</li>
+                        </ul>
+                        <p>El plazo de respuesta no excederá de 20 días hábiles contados a partir de la recepción de su solicitud, conforme a lo establecido por el artículo 32 de la LFPDPPP.</p>
+                    </div>
+
+                    <div class="legal-section-block">
+                        <h5><i class="fa-solid fa-arrows-rotate"></i> 7. Procedimiento para Modificaciones al Aviso de Privacidad</h5>
+                        <p>
+                            El presente Aviso de Privacidad puede ser modificado, cambiado o actualizado en atención a novedades legislativas, políticas internas o nuevos requerimientos de servicio. Cualquier modificación será puesta a su disposición mediante su publicación en este mismo sitio web.
                         </p>
                     </div>
 
                     <div class="legal-callout">
-                        <p><i class="fa-solid fa-lock text-gold"></i> <strong>Secreto Profesional Garantizado:</strong> Toda información compartida goza adicionalmente del deber deontológico de confidencialidad y secreto profesional establecido por la legislación mexicana y el Código Civil para el ejercicio de la abogacía.</p>
+                        <p><i class="fa-solid fa-lock text-gold"></i> <strong>Compromiso con el Secreto Profesional y Confidencialidad:</strong> Toda información compartida con motivo de una consulta goza adicionalmente del deber deontológico de confidencialidad y secreto profesional establecido por la legislación civil y penal aplicable al ejercicio de la abogacía en los Estados Unidos Mexicanos.</p>
                     </div>
                 </div>
 
@@ -688,74 +724,102 @@
                     <div class="legal-section-block">
                         <h5><i class="fa-solid fa-landmark"></i> 1. Aceptación y Objeto de la Plataforma</h5>
                         <p>
-                            El acceso y navegación en este sitio web atribuye la condición de usuario e implica la aceptación plena de los presentes Términos y Condiciones. Este portal tiene carácter informativo institucional y de canal de enlace profesional para los servicios legales que prestan los Abogados Titulares de <strong>FB Abogados</strong>.
+                            El acceso y navegación en este sitio web atribuye la condición de usuario e implica la aceptación plena de los presentes Términos y Condiciones. Este portal tiene carácter exclusivamente informativo institucional y de canal de enlace profesional para los servicios jurídicos que ofrecen los Abogados Titulares de <strong>FB Abogados</strong>.
                         </p>
                     </div>
 
                     <div class="legal-section-block">
-                        <h5><i class="fa-solid fa-user-check"></i> 2. Uso Adecuado del Sitio y los Formularios</h5>
-                        <p>El usuario se compromete a hacer un uso lícito, diligente y de buena fe de los formularios de diagnóstico y contacto, obligándose a:</p>
+                        <h5><i class="fa-solid fa-business-time"></i> 2. Disponibilidad de Atención y Tiempos de Respuesta</h5>
+                        <p>
+                            La atención a través de WhatsApp o llamadas telefónicas se realiza en días y horas hábiles laborables conforme a la disponibilidad del equipo legal. Los tiempos de respuesta son estimados y están sujetos a las actividades procesales en audiencias y tribunales. No se garantiza una disponibilidad de atención en tiempo real las 24 horas del día.
+                        </p>
+                    </div>
+
+                    <div class="legal-section-block">
+                        <h5><i class="fa-solid fa-gavel"></i> 3. Inexistencia de Garantía de Resultados Judiciales</h5>
+                        <p>
+                            De estricta conformidad con las normas éticas del foro legal y la legislación mexicana, <strong>FB Abogados no garantiza resultados resolutivos específicos ni sentencias favorables obligatorias</strong>. El compromiso profesional de la firma es de medios, técnica jurídica rigurosa y diligencia procesal, debiendo entenderse que las resoluciones en juicio corresponden en forma soberana e independiente a los jueces y magistrados con base en las pruebas y el marco legal aplicable.
+                        </p>
+                    </div>
+
+                    <div class="legal-section-block">
+                        <h5><i class="fa-solid fa-handshake"></i> 4. Alcance de la Asesoría y Formalización de Servicios</h5>
+                        <p>
+                            La información preliminar provista a través de este portal, evaluadores interactivos o mensajería de WhatsApp tiene carácter de orientación divulgativa y no constituye dictamen ni asesoría formal vinculante. La prestación formal de servicios y la representación procesal únicamente cobran vigencia tras la suscripción bilateral del respectivo Contrato de Prestación de Servicios Profesionales.
+                        </p>
+                    </div>
+
+                    <div class="legal-section-block">
+                        <h5><i class="fa-solid fa-user-check"></i> 5. Uso Adecuado del Sitio y Formularios</h5>
+                        <p>El usuario se compromete a hacer un uso lícito, diligente y de buena fe del portal, obligándose a:</p>
                         <ul>
-                            <li><i class="fa-solid fa-check"></i> Proporcionar datos de contacto verídicos y comprobables.</li>
-                            <li><i class="fa-solid fa-check"></i> No ingresar contenidos difamatorios, ilícitos, enlaces comerciales de spam ni códigos o secuencias que vulneren la seguridad informática del sitio.</li>
-                            <li><i class="fa-solid fa-check"></i> Respetar los mecanismos de protección y filtros anti-bot implementados en el portal.</li>
+                            <li><i class="fa-solid fa-check"></i> Proporcionar datos de contacto verídicos y auténticos.</li>
+                            <li><i class="fa-solid fa-check"></i> No introducir contenidos difamatorios, ilícitos, enlaces comerciales de spam ni códigos o secuencias que pretendan vulnerar la seguridad informática de la plataforma.</li>
+                            <li><i class="fa-solid fa-check"></i> Respetar los filtros técnicos anti-bot implementados en el sitio.</li>
                         </ul>
                     </div>
 
                     <div class="legal-section-block">
-                        <h5><i class="fa-solid fa-copyright"></i> 3. Propiedad Intelectual y Derechos Reservados</h5>
+                        <h5><i class="fa-solid fa-shield-virus"></i> 6. Limitación de Responsabilidad Técnica</h5>
                         <p>
-                            El nombre comercial, identidad de marca, logotipos, textos explicativos, estructura, código fuente y diseño visual de este portal son propiedad exclusiva de FB Abogados. Queda terminantemente prohibida su reproducción parcial o total, distribución o plagio sin autorización expresa por escrito de los titulares.
+                            FB Abogados no asume responsabilidad alguna por interrupciones en los servicios de conectividad a internet, fallas técnicas en la aplicación de mensajería externa WhatsApp, ni por decisiones legales adoptadas de forma unilateral por el usuario sin la debida formalización de un contrato de servicios profesionales.
                         </p>
                     </div>
 
                     <div class="legal-section-block">
-                        <h5><i class="fa-solid fa-scale-unbalanced-flip"></i> 4. Legislación y Jurisdicción Aplicable</h5>
+                        <h5><i class="fa-solid fa-copyright"></i> 7. Propiedad Intelectual y Derechos Reservados</h5>
                         <p>
-                            Para la interpretación, cumplimiento y resolución de controversias derivadas del uso de este sitio web, las partes se someten expresamente a las leyes federales de los Estados Unidos Mexicanos y a la jurisdicción de los tribunales competentes correspondientes en el Estado de México, renunciando a cualquier otro fuero que pudiera corresponderles por razón de sus domicilios presentes o futuros.
+                            El nombre comercial FB Abogados, logotipos, diseño gráfico, estructura visual, código fuente y contenidos textuales son titularidad del despacho. Queda prohibida su reproducción, distribución o plagio sin la debida autorización expresa por escrito.
+                        </p>
+                    </div>
+
+                    <div class="legal-section-block">
+                        <h5><i class="fa-solid fa-scale-unbalanced-flip"></i> 8. Legislación y Jurisdicción Aplicable</h5>
+                        <p>
+                            Para la interpretación y cumplimiento de estos Términos, las partes se someten a las leyes federales de los Estados Unidos Mexicanos y a los tribunales competentes en el Estado de México, renunciando a cualquier otro fuero que pudiera corresponderles.
                         </p>
                     </div>
                 </div>
 
-                <!-- TAB 3: DESLINDE DE RESPONSABILIDAD LEGAL -->
+                <!-- TAB 3: DESLINDE DE RESPONSABILIDAD LEGAL Y CONFIDENCIALIDAD -->
                 <div class="legal-tab-pane" id="legalTab-deslinde">
-                    <h4>Deslinde de Responsabilidad Legal y Secreto Profesional</h4>
-                    <span class="legal-meta-badge">Aviso Legal para Protección de Usuarios y del Despacho</span>
+                    <h4>Deslinde de Responsabilidad Legal y Confidencialidad</h4>
+                    <span class="legal-meta-badge">Aviso Legal para Claridad de Usuarios y del Despacho</span>
 
                     <div class="legal-section-block">
                         <h5><i class="fa-solid fa-handshake-slash"></i> 1. Inexistencia de Relación Abogado-Cliente Automática</h5>
                         <p>
-                            El envío de datos, mensajes o el uso de los formularios de contacto, diagnósticos interactivos o botones de enlace a WhatsApp <strong>NO constituye, perfecciona ni formaliza una relación jurídica abogado-cliente</strong>, patrocinio procesal, mandato judicial ni aceptación formal del caso.
+                            <strong>El acceso al sitio web, su navegación o el envío de información a través de los medios de contacto disponibles no constituye, por sí mismo, la celebración automática de una relación abogado-cliente</strong>, patrocinio procesal, mandato judicial ni aceptación formal del caso.
                         </p>
                         <p>
                             La relación profesional formal y la representación procesal únicamente nacen y se vuelven exigibles una vez que:
                         </p>
                         <ul>
-                            <li><i class="fa-solid fa-circle-check"></i> Se ha realizado una entrevista formal presencial o virtual.</li>
-                            <li><i class="fa-solid fa-circle-check"></i> Se ha revisado a profundidad el expediente, constancias y documentación original.</li>
-                            <li><i class="fa-solid fa-circle-check"></i> Se ha suscrito el <strong>Contrato de Prestación de Servicios Profesionales</strong> por ambas partes y cubierto el anticipo de honorarios convenido.</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Se ha realizado una entrevista formal presencial o virtual con los titulares.</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Se han revisado a profundidad las constancias, documentos o expediente original del asunto.</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Se ha formalizado y suscrito el <strong>Contrato de Prestación de Servicios Profesionales</strong> por ambas partes y cubierto el anticipo de honorarios convenido.</li>
                         </ul>
                     </div>
 
                     <div class="legal-section-block">
                         <h5><i class="fa-solid fa-triangle-exclamation"></i> 2. Términos Procesales y Plazos Fatales de Urgencia</h5>
                         <p>
-                            <strong>ADVERTENCIA EXPRESA:</strong> El usuario NO debe confiar ni utilizar este portal web ni sus formularios para atender plazos fatales, términos judiciales perentorios (tales como términos para contestar demandas, interponer recursos de apelación, amparos con suspensión urgente o términos constitucionales de detención).
+                            <strong>ADVERTENCIA EXPRESA:</strong> El usuario NO debe confiar ni utilizar este portal web ni sus formularios para atender plazos procesales perentorios o términos judiciales fatales (tales como términos de contestación de demanda, interposición de recursos ordinarios, demandas de amparo urgente con solicitud de suspensión o términos constitucionales en materia penal).
                         </p>
                         <p>
-                            FB Abogados no asume responsabilidad alguna por la preclusión de derechos procesales o términos vencidos de asuntos en los que no exista previamente contrato formal de patrocinio vigente. En casos de flagrancia o detención penal urgente, se debe establecer comunicación telefónica directa de inmediato.
+                            FB Abogados no asume responsabilidad alguna por la preclusión de derechos procesales o vencimiento de plazos en asuntos respecto de los cuales no exista previamente un contrato formal de patrocinio legal debidamente perfeccionado. En situaciones penales de flagrancia o detención urgente, se recomienda comunicarse telefónicamente de forma inmediata.
                         </p>
                     </div>
 
                     <div class="legal-section-block">
-                        <h5><i class="fa-solid fa-file-lines"></i> 3. Carácter Informativo y Alcance de las Evaluaciones</h5>
+                        <h5><i class="fa-solid fa-file-lines"></i> 3. Carácter Informativo de las Evaluaciones</h5>
                         <p>
-                            La información vertida en este sitio web tiene carácter estrictamente divulgativo y formativo. Las leyes y criterios judiciales evolucionan continuamente; en consecuencia, ninguna información proporcionada en la plataforma debe interpretarse como un dictamen o garantía de resultado judicial definitivo, toda vez que las resoluciones en juicio dependen de las determinaciones de jueces y tribunales con base en el material probatorio aportado.
+                            La información provista en este portal tiene un propósito estrictamente divulgativo e informativo. Ninguna comunicación o resultado emitido por herramientas del portal debe considerarse un dictamen definitivo.
                         </p>
                     </div>
 
                     <div class="legal-callout">
-                        <p><i class="fa-solid fa-signature text-gold"></i> <strong>Firma Acreditada:</strong> Lic. Edith Bernal Martínez (Cédula Profesional SEP 14200776) y Lic. Miguel Fabián Sánchez (Cédula Profesional SEP 14066883). Ejercicio legal colegiado y ético.</p>
+                        <p><i class="fa-solid fa-signature text-gold"></i> <strong>Acreditación Profesional:</strong> Lic. Edith Bernal Martínez (Cédula Profesional SEP 14200776) y Lic. Miguel Fabián Sánchez (Cédula Profesional SEP 14066883). Ejercicio profesional colegiado, ético y diligente.</p>
                     </div>
                 </div>
             </div>

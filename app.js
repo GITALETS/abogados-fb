@@ -1,11 +1,11 @@
 /* ==========================================================================
-   FB ABOGADOS - SISTEMA AVANZADO DE SEGURIDAD Y VALIDACIÓN ANTI-SPAM
+   FB ABOGADOS - SISTEMA DE VALIDACIÓN TÉCNICA Y CANALIZACIÓN A WHATSAPP
    Firma Legal: Lic. Edith Bernal Martínez (Céd. Prof. 14200776)
                 Lic. Miguel Fabián Sánchez (Céd. Prof. 14066883)
    ========================================================================== */
 
 /* ==========================================================================
-   MÓDULO DE SEGURIDAD MILITAR (ANTI-SPAM, ANTI-ASESORÍAS FALSAS, ANTI-BOTS)
+   MÓDULO DE VALIDACIÓN TÉCNICA Y FILTRO ANTI-SPAM (FILTROS DE ENTRADA Y CONTROL)
    ========================================================================== */
 const UltraSecurityEngine = (() => {
     // Marca de tiempo del momento exacto en que el usuario cargó la página
@@ -205,6 +205,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Control de envíos repetidos
             if (UltraSecurityEngine.isThrottled('diagnosticForm')) {
                 alert('Por favor espera 5 segundos antes de realizar otra evaluación.');
+                return;
+            }
+
+            // Verificación de consentimiento de privacidad y deslinde legal
+            const diagnosticTermsCheck = document.getElementById('acceptDiagnosticTerms');
+            if (diagnosticTermsCheck && !diagnosticTermsCheck.checked) {
+                alert('Debes confirmar que has leído y aceptas el Aviso de Privacidad y el Deslinde Legal antes de enviar tu evaluación.');
+                diagnosticTermsCheck.focus();
                 return;
             }
 
