@@ -1312,3 +1312,316 @@ ul {
         font-size: 0.98rem;
     }
 }
+
+/* ==========================================================================
+   MÓDULO LEGAL, AVISO DE PRIVACIDAD Y TÉRMINOS (ESTILO LUXURY)
+   ========================================================================== */
+.form-legal-note {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.legal-link {
+    color: var(--gold-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.legal-link:hover {
+    color: var(--gold-light);
+    text-shadow: 0 0 8px var(--gold-glow);
+}
+
+.legal-checkbox-group {
+    margin: 1.2rem 0;
+}
+
+.legal-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.legal-checkbox-label input[type="checkbox"] {
+    margin-top: 0.15rem;
+    accent-color: var(--gold-primary);
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.footer-legal-links {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.footer-legal-links li {
+    margin-bottom: 0.6rem;
+}
+
+.footer-legal-links a {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.footer-legal-links a:hover {
+    color: var(--gold-primary);
+    transform: translateX(4px);
+}
+
+/* Modal Legal Overlay & Window */
+.legal-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(8, 10, 14, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.legal-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.legal-modal-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border-highlight);
+    border-radius: 14px;
+    width: 100%;
+    max-width: 850px;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.15);
+    transform: translateY(20px) scale(0.98);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+.legal-modal.active .legal-modal-container {
+    transform: translateY(0) scale(1);
+}
+
+.legal-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.8rem;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-surface);
+}
+
+.legal-modal-header h3 {
+    font-family: var(--font-heading);
+    color: var(--gold-primary);
+    font-size: 1.45rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0;
+}
+
+.legal-modal-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.6rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    transition: var(--transition);
+}
+
+.legal-modal-close:hover {
+    color: #ff5555;
+    background: rgba(255, 85, 85, 0.1);
+}
+
+/* Tabs Bar */
+.legal-modal-tabs {
+    display: flex;
+    background: var(--bg-dark);
+    border-bottom: 1px solid var(--border-color);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.legal-modal-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.legal-tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.85rem 1.2rem;
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+    border-bottom: 2px solid transparent;
+}
+
+.legal-tab-btn i {
+    font-size: 0.95rem;
+}
+
+.legal-tab-btn:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.legal-tab-btn.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold-primary);
+    background: rgba(212, 175, 55, 0.06);
+}
+
+/* Modal Content Area */
+.legal-modal-body {
+    padding: 1.8rem;
+    overflow-y: auto;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-primary) var(--bg-surface);
+}
+
+.legal-modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.legal-modal-body::-webkit-scrollbar-thumb {
+    background-color: var(--gold-primary);
+    border-radius: 4px;
+}
+
+.legal-tab-pane {
+    display: none;
+    animation: fadeInTab 0.25s ease;
+}
+
+.legal-tab-pane.active {
+    display: block;
+}
+
+@keyframes fadeInTab {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.legal-tab-pane h4 {
+    color: var(--gold-primary);
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.legal-meta-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: var(--gold-light);
+    background: rgba(212, 175, 55, 0.12);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.legal-section-block {
+    margin-bottom: 1.5rem;
+}
+
+.legal-section-block h5 {
+    color: var(--text-main);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legal-section-block h5 i {
+    color: var(--gold-primary);
+    font-size: 0.85rem;
+}
+
+.legal-section-block p {
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+}
+
+.legal-section-block ul {
+    list-style: none;
+    padding-left: 0.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.legal-section-block ul li {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.legal-section-block ul li i {
+    color: var(--gold-primary);
+    margin-top: 0.3rem;
+    font-size: 0.75rem;
+}
+
+.legal-callout {
+    background: rgba(212, 175, 55, 0.07);
+    border-left: 3px solid var(--gold-primary);
+    padding: 1rem 1.2rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.2rem 0;
+}
+
+.legal-callout p {
+    margin: 0;
+    font-size: 0.86rem;
+    color: var(--text-main);
+}
+
+.legal-modal-footer {
+    padding: 1rem 1.8rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-surface);
+    display: flex;
+    justify-content: flex-end;
+}

@@ -17,9 +17,9 @@ Permite a los usuarios consultar especialidades legales, agendar asesorías dire
 ## Características Principales
 
 - **Especialidades Jurídicas Destacadas**:
-  - **Derecho Civil**: Contratos, arrendamientos, propiedad y recuperación de bienes.
-  - **Derecho Familiar**: Divorcios, pensión alimenticia, custodia e intestados/sucesiones.
-  - **Derecho Penal**: Defensa jurídica, denuncias, amparos y atención ante MP.
+  - **Derecho Civil**: Demandas, reconvención (contrademanda), usucapión, contratos, propiedad y regularización.
+  - **Derecho Familiar**: Divorcios, pensión alimenticia, custodia y patrimonio familiar.
+  - **Derecho Penal**: Denuncias, querellas, hechos de tránsito, lesiones y defensa ante MP o juzgados.
   - **Derecho Mercantil**: Cobranza judicial/extrajudicial, pagarés y contratos comerciales.
 
 - **UltraSecurityEngine (Módulo de Seguridad Integrado en JavaScript)**:
@@ -32,6 +32,12 @@ Permite a los usuarios consultar especialidades legales, agendar asesorías dire
 
 - **Integración Directa con WhatsApp Business**:
   - Transmisión instantánea de diagnósticos y datos de contacto formateados directamente al teléfono oficial de la titular (**+52 729 140 4674**).
+
+- **Cumplimiento Normativo y Blindaje Legal Integral**:
+  - **Aviso de Privacidad Integral (LFPDPPP)**: Conforme a la legislación mexicana, con señalamiento de responsables, finalidades primarias y mecanismo de ejercicio de Derechos ARCO.
+  - **Términos y Condiciones de Uso**: Reglas de utilización ética de la plataforma y salvaguarda de propiedad intelectual.
+  - **Deslinde de Responsabilidad (Legal Disclaimer) & Secreto Profesional**: Delimitación expresa de que el uso del sitio no constituye relación abogado-cliente automática, advertencia sobre plazos procesales perentorios y protección bajo secreto profesional.
+  - **Centro Legal Interactivo en Modal**: Visualización estructurada por pestañas accesible desde el footer y los formularios, con consentimiento informado antes del envío de datos.
 
 - **Diseño Luxury Responsive & SEO Optimizado**:
   - Estilo visual de alta gama con tonos oro pulido (`#d4af37`) y azul noche (`#0b0d10`).

@@ -268,6 +268,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // 2.5 Validación de Aceptación de Términos y Aviso de Privacidad
+            const legalTermsCheck = document.getElementById('acceptLegalTerms');
+            if (legalTermsCheck && !legalTermsCheck.checked) {
+                alert('Debes confirmar que has leído y aceptas el Aviso de Privacidad y Términos Legales antes de enviar tu consulta.');
+                legalTermsCheck.focus();
+                return;
+            }
+
             // 3. Control de enfriamiento (Anti-Flood)
             if (UltraSecurityEngine.isThrottled('contactForm')) {
                 alert('Por favor espera 5 segundos antes de realizar otro envío.');
@@ -351,6 +359,85 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 navbar.style.boxShadow = 'none';
             }
+        }
+    });
+
+    /* ----------------------------------------------------------------------
+       6. CONTROLADOR DEL MODAL LEGAL Y POLÍTICAS DE PRIVACIDAD
+       ---------------------------------------------------------------------- */
+    const legalModal = document.getElementById('legalModal');
+    const closeLegalBtn = document.getElementById('closeLegalModal');
+    const acceptLegalBtn = document.getElementById('acceptLegalModalBtn');
+    const legalTabBtns = document.querySelectorAll('.legal-tab-btn');
+    const legalTabPanes = document.querySelectorAll('.legal-tab-pane');
+
+    const switchLegalTab = (tabName) => {
+        legalTabBtns.forEach(btn => {
+            if (btn.dataset.tab === tabName) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        legalTabPanes.forEach(pane => {
+            if (pane.id === `legalTab-${tabName}`) {
+                pane.classList.add('active');
+            } else {
+                pane.classList.remove('active');
+            }
+        });
+    };
+
+    const openLegalModal = (tabName = 'privacidad') => {
+        if (!legalModal) return;
+        switchLegalTab(tabName);
+        legalModal.classList.add('active');
+        legalModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeLegalModal = () => {
+        if (!legalModal) return;
+        legalModal.classList.remove('active');
+        legalModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    };
+
+    // Triggers de apertura distribuidos en la landing page
+    document.querySelectorAll('.trigger-legal-modal').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const tabTarget = trigger.dataset.tab || 'privacidad';
+            openLegalModal(tabTarget);
+        });
+    });
+
+    // Pestañas interiores del modal
+    legalTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabTarget = btn.dataset.tab;
+            if (tabTarget) switchLegalTab(tabTarget);
+        });
+    });
+
+    // Acciones de cierre
+    if (closeLegalBtn) closeLegalBtn.addEventListener('click', closeLegalModal);
+    if (acceptLegalBtn) acceptLegalBtn.addEventListener('click', closeLegalModal);
+
+    // Cierre al dar clic fuera del contenido
+    if (legalModal) {
+        legalModal.addEventListener('click', (e) => {
+            if (e.target === legalModal) {
+                closeLegalModal();
+            }
+        });
+    }
+
+    // Cierre mediante la tecla Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && legalModal && legalModal.classList.contains('active')) {
+            closeLegalModal();
         }
     });
 });
